@@ -26,9 +26,11 @@ function [check,E,V_star,isolates] =isValidGraphSet(V)
         E='adds up to an odd amount!';
         return
     end
+    % separate isolates from V, then sort V
     isolates=sum(V==0);
     V_star=sort(V(V~=0),'descend');
-    if sum(V_star>=length(V_star)) % deg(v_i)<n
+    % deg(v_i)<n
+    if sum(V_star>=length(V_star)) 
         E='may have a degree larger than the possible amount!';
         return
     end
