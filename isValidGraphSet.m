@@ -4,12 +4,6 @@ function [check,E,V_star,isolates] =isValidGraphSet(V)
     V_star=[];
     isolates=0; 
     
-    try % V only has positive integers
-        mustBeInteger(V), mustBeNonnegative(V)
-    catch
-        E='must contain only positive integers!';
-        return
-    end
     try % V is not empty
         mustBeNonNan(V), mustBeNonempty(V)
     catch
@@ -20,6 +14,12 @@ function [check,E,V_star,isolates] =isValidGraphSet(V)
          mustBeFinite(V)
     catch
         E='must be finite!';
+        return
+    end
+        try % V only has nonnegative integers
+        mustBeInteger(V), mustBeNonnegative(V)
+    catch
+        E='must contain only positive integers!';
         return
     end
     if rem(sum(V),2) % q is even
